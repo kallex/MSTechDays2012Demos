@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TechDays2012DemoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="TechDays2012DemoModelStoreContainer">
+          <EntitySet Name="Classes" EntityType="TechDays2012DemoModel.Store.Classes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ClassProperties" EntityType="TechDays2012DemoModel.Store.ClassProperties" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ClassProperties_Classes" Association="TechDays2012DemoModel.Store.FK_ClassProperties_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="ClassProperties" EntitySet="ClassProperties" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ClassProperties">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="bigint" Nullable="false" />
+          <Property Name="PropertyName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="PropertyType" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ValidateOnSet" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClassProperties_Classes">
+          <End Role="Classes" Type="TechDays2012DemoModel.Store.Classes" Multiplicity="1" />
+          <End Role="ClassProperties" Type="TechDays2012DemoModel.Store.ClassProperties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClassProperties">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TechDays2012DemoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="TechDays2012DemoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Classes" EntityType="TechDays2012DemoModel.Class" />
+          <EntitySet Name="ClassProperties" EntityType="TechDays2012DemoModel.ClassProperty" />
+          <AssociationSet Name="FK_ClassProperties_Classes" Association="TechDays2012DemoModel.FK_ClassProperties_Classes">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="ClassProperties" EntitySet="ClassProperties" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ClassProperties" Relationship="TechDays2012DemoModel.FK_ClassProperties_Classes" FromRole="Classes" ToRole="ClassProperties" />
+        </EntityType>
+        <EntityType Name="ClassProperty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int64" Nullable="false" />
+          <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PropertyType" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ValidateOnSet" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Class" Relationship="TechDays2012DemoModel.FK_ClassProperties_Classes" FromRole="ClassProperties" ToRole="Classes" />
+        </EntityType>
+        <Association Name="FK_ClassProperties_Classes">
+          <End Role="Classes" Type="TechDays2012DemoModel.Class" Multiplicity="1" />
+          <End Role="ClassProperties" Type="TechDays2012DemoModel.ClassProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClassProperties">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TechDays2012DemoModelStoreContainer" CdmEntityContainer="TechDays2012DemoEntities">
+          <EntitySetMapping Name="Classes"><EntityTypeMapping TypeName="TechDays2012DemoModel.Class"><MappingFragment StoreEntitySet="Classes">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ClassProperties"><EntityTypeMapping TypeName="TechDays2012DemoModel.ClassProperty"><MappingFragment StoreEntitySet="ClassProperties">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+            <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+            <ScalarProperty Name="PropertyType" ColumnName="PropertyType" />
+            <ScalarProperty Name="ValidateOnSet" ColumnName="ValidateOnSet" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="T4AspectDemonstrationModel">
+        <EntityTypeShape EntityType="TechDays2012DemoModel.Class" Width="1.5" PointX="0.75" PointY="1.25" Height="1.5956835937499998" IsExpanded="true" />
+        <EntityTypeShape EntityType="TechDays2012DemoModel.ClassProperty" Width="1.5" PointX="3" PointY="0.875" Height="2.1725878906249996" IsExpanded="true" />
+        <AssociationConnector Association="TechDays2012DemoModel.FK_ClassProperties_Classes" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.047841796875" />
+          <ConnectorPoint PointX="3" PointY="2.047841796875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
