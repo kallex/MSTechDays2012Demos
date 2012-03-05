@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4 Basics", "T4 Basics\T4 Basics.csproj", "{5EDDFD78-8217-4DCC-90BE-639E3C217F60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4 Advanced", "T4 Advanced\T4 Advanced.csproj", "{F5A53737-2502-4111-B7A4-E60A4A32F0ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4 EntityFramework Custom Aspect", "T4 EntityFramework Custom Aspect\T4 EntityFramework Custom Aspect.csproj", "{D5B1AD33-62F7-4C6D-BBE4-6CD4C8C02FCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4 Filesystem Input", "T4 Filesystem Input\T4 Filesystem Input.csproj", "{6CBCF531-2DF0-4629-94E8-DB40AA7601CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4 SQL Database Input", "T4 SQL Database Input\T4 SQL Database Input.csproj", "{053F6C59-44C8-4EC1-BCF5-321BBB348CC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4 SQL Database Schema Input", "T4 SQL Database Schema Input\T4 SQL Database Schema Input.csproj", "{3D942563-E6E6-4524-B739-540CF1699F4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5EDDFD78-8217-4DCC-90BE-639E3C217F60}.Debug|x86.ActiveCfg = Debug|x86
+		{5EDDFD78-8217-4DCC-90BE-639E3C217F60}.Debug|x86.Build.0 = Debug|x86
+		{5EDDFD78-8217-4DCC-90BE-639E3C217F60}.Release|x86.ActiveCfg = Release|x86
+		{5EDDFD78-8217-4DCC-90BE-639E3C217F60}.Release|x86.Build.0 = Release|x86
+		{F5A53737-2502-4111-B7A4-E60A4A32F0ED}.Debug|x86.ActiveCfg = Debug|x86
+		{F5A53737-2502-4111-B7A4-E60A4A32F0ED}.Debug|x86.Build.0 = Debug|x86
+		{F5A53737-2502-4111-B7A4-E60A4A32F0ED}.Release|x86.ActiveCfg = Release|x86
+		{F5A53737-2502-4111-B7A4-E60A4A32F0ED}.Release|x86.Build.0 = Release|x86
+		{D5B1AD33-62F7-4C6D-BBE4-6CD4C8C02FCD}.Debug|x86.ActiveCfg = Debug|x86
+		{D5B1AD33-62F7-4C6D-BBE4-6CD4C8C02FCD}.Debug|x86.Build.0 = Debug|x86
+		{D5B1AD33-62F7-4C6D-BBE4-6CD4C8C02FCD}.Release|x86.ActiveCfg = Release|x86
+		{D5B1AD33-62F7-4C6D-BBE4-6CD4C8C02FCD}.Release|x86.Build.0 = Release|x86
+		{6CBCF531-2DF0-4629-94E8-DB40AA7601CD}.Debug|x86.ActiveCfg = Debug|x86
+		{6CBCF531-2DF0-4629-94E8-DB40AA7601CD}.Debug|x86.Build.0 = Debug|x86
+		{6CBCF531-2DF0-4629-94E8-DB40AA7601CD}.Release|x86.ActiveCfg = Release|x86
+		{6CBCF531-2DF0-4629-94E8-DB40AA7601CD}.Release|x86.Build.0 = Release|x86
+		{053F6C59-44C8-4EC1-BCF5-321BBB348CC1}.Debug|x86.ActiveCfg = Debug|x86
+		{053F6C59-44C8-4EC1-BCF5-321BBB348CC1}.Debug|x86.Build.0 = Debug|x86
+		{053F6C59-44C8-4EC1-BCF5-321BBB348CC1}.Release|x86.ActiveCfg = Release|x86
+		{053F6C59-44C8-4EC1-BCF5-321BBB348CC1}.Release|x86.Build.0 = Release|x86
+		{3D942563-E6E6-4524-B739-540CF1699F4B}.Debug|x86.ActiveCfg = Debug|x86
+		{3D942563-E6E6-4524-B739-540CF1699F4B}.Debug|x86.Build.0 = Debug|x86
+		{3D942563-E6E6-4524-B739-540CF1699F4B}.Release|x86.ActiveCfg = Release|x86
+		{3D942563-E6E6-4524-B739-540CF1699F4B}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
