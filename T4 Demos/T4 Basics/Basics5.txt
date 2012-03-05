@@ -1,0 +1,6 @@
+﻿
+Hello World! Current time is: 03/05/2012 15:49:18
+
+LoopBlock: 	Hello Finland!
+LoopBlock: 	Hello Europe!
+LoopBlock: 	Hello World!

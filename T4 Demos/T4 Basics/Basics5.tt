@@ -1,0 +1,18 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".txt" #>
+
+Hello World! Current time is: <#= System.DateTime.Now #>
+
+<# 
+	// Control code block
+	string[] listOfAreas = new string[] { "Finland", "Europe", "World" };
+	this.PushIndent("LoopBlock: ");
+	foreach(var listItem in listOfAreas)
+	{
+		// Uncomment line below to demonstrate controlled generation
+		// this.GenerationEnvironment.Clear();
+#>
+	Hello <#= listItem #>!
+<#
+	}
+#>

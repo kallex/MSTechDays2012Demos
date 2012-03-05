@@ -46,6 +46,58 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Basics1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Basics1.txt</LastGenOutput>
+    </None>
+    <None Include="Basics2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Basics2.html</LastGenOutput>
+    </None>
+    <None Include="Basics3.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Basics3.txt</LastGenOutput>
+    </None>
+    <None Include="Basics4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Basics4.txt</LastGenOutput>
+    </None>
+    <None Include="Basics5.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Basics5.txt</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Basics1.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Basics1.tt</DependentUpon>
+    </Content>
+    <Content Include="Basics2.html">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Basics2.tt</DependentUpon>
+    </Content>
+    <Content Include="Basics3.txt">
+      <DependentUpon>Basics3.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Basics4.txt">
+      <DependentUpon>Basics4.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Basics5.txt">
+      <DependentUpon>Basics5.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

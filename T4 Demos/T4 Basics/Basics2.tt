@@ -1,0 +1,8 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".html" #>
+<table>
+<tr>
+<th>What?</th></tr>
+<tr>
+<td>Hello World!</td></tr>
+</table>
