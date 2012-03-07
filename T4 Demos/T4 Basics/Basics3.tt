@@ -1,4 +1,5 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ output extension=".txt" #>
+<#@ import namespace="System" #>
 
-Hello World! Current time is: <#= System.DateTime.Now #>
+Hello World! Current time is: <#= System.DateTime.Now #> or with import-statement <#= DateTime.Now #>

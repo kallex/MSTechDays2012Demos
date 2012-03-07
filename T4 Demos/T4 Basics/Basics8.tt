@@ -1,0 +1,19 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".txt" #>
+<#@ include file="Basics8Include.ttinclude" #>
+
+Hello World! Current time is: <#= System.DateTime.Now #>
+
+<# 
+	// Control code block
+	string[] listOfAreas = new string[] { "Finland", "Europe", "World" };
+	foreach(var listItem in listOfAreas)
+	{
+#>
+	// Evaluation replacement:
+	<#= GetHelloWorldString(listItem) #>
+	<# GenerateHelloWorld(listItem); #>
+<#
+	}
+#>
+	

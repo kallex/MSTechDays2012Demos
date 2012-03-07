@@ -1,2 +1,2 @@
 ﻿
-Hello World! Current time is: 03/05/2012 15:40:46
+Hello World! Current time is: 03/07/2012 13:36:45 or with import-statement 03/07/2012 13:36:45
