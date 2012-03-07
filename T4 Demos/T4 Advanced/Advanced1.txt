@@ -1,0 +1,4 @@
+﻿Any custom content:
+-------------------
+This could also be anything else than a .txt file
+- Also including modifications
