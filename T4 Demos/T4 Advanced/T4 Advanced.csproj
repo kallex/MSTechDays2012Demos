@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Advanced2.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Advanced2.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,6 +61,10 @@
       <Generator>T4ScriptFileGenerator</Generator>
       <LastGenOutput>Advanced1.tt</LastGenOutput>
     </Content>
+    <Content Include="Advanced2.txt">
+      <Generator>T4ScriptFileGenerator</Generator>
+      <LastGenOutput>Advanced2.tt</LastGenOutput>
+    </Content>
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +74,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Advanced1.txt</DependentUpon>
       <LastGenOutput>Advanced1.generated.txt</LastGenOutput>
+    </None>
+    <None Include="Advanced2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Advanced2.txt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <LastGenOutput>Advanced2.generated.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
