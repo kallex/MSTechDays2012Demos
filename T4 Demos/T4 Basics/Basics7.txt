@@ -1,0 +1,22 @@
+﻿
+Hello World! Current time is: 03/07/2012 12:58:54
+
+	// Evaluation replacement:
+	Hello Finland!
+			// Bug with indent?
+GenerateHelloWorld		// What?
+GenerateHelloWorld		Hello Finland!
+GenerateHelloWorld		// Indent?
+	// Evaluation replacement:
+	Hello Europe!
+			// Bug with indent?
+GenerateHelloWorld		// What?
+GenerateHelloWorld		Hello Europe!
+GenerateHelloWorld		// Indent?
+	// Evaluation replacement:
+	Hello World!
+			// Bug with indent?
+GenerateHelloWorld		// What?
+GenerateHelloWorld		Hello World!
+GenerateHelloWorld		// Indent?
+	

@@ -67,6 +67,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Basics5.txt</LastGenOutput>
     </None>
+    <None Include="Basics6.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Basics6.txt</LastGenOutput>
+    </None>
+    <None Include="Basics7.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Basics7.txt</LastGenOutput>
+    </None>
+    <None Include="Basics7Include.ttinclude" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -94,6 +103,16 @@
     </Content>
     <Content Include="Basics5.txt">
       <DependentUpon>Basics5.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Basics6.txt">
+      <DependentUpon>Basics6.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="Basics7.txt">
+      <DependentUpon>Basics7.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Content>

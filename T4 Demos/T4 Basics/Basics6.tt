@@ -1,0 +1,41 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".txt" #>
+
+Hello World! Current time is: <#= System.DateTime.Now #>
+
+<# 
+	// Control code block
+	string[] listOfAreas = new string[] { "Finland", "Europe", "World" };
+	foreach(var listItem in listOfAreas)
+	{
+#>
+	// Evaluation replacement:
+	<#= GetHelloWorldString(listItem) #>
+	<# GenerateHelloWorld(listItem); #>
+<#
+	}
+#>
+	
+<#+
+	
+	string GetHelloWorldString(string helloTarget)
+	{
+		return "Hello " + helloTarget + "!";
+
+	}
+	
+	void GenerateHelloWorld(string helloTarget)
+	{
+		this.PushIndent("GenerateHelloWorld");
+#>
+		// Bug with indent?
+		// What?
+		<#= GetHelloWorldString(helloTarget) #>
+		// Indent?
+<#+
+		this.PopIndent();
+	}
+	
+	
+	
+#>

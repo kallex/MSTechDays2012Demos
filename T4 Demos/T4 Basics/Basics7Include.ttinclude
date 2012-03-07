@@ -1,0 +1,23 @@
+﻿<#+
+	
+	string GetHelloWorldString(string helloTarget)
+	{
+		return "Hello " + helloTarget + "!";
+
+	}
+	
+	void GenerateHelloWorld(string helloTarget)
+	{
+		this.PushIndent("GenerateHelloWorld");
+#>
+		// Bug with indent?
+		// What?
+		<#= GetHelloWorldString(helloTarget) #>
+		// Indent?
+<#+
+		this.PopIndent();
+	}
+	
+	
+	
+#>
