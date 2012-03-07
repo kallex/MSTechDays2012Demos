@@ -1,4 +1,11 @@
-
+﻿
+// Original
+Any custom content:
+-------------------
+This could also be anything else than a .txt file
+- Also including modifications
+	
+// Processed
 Processed: Any custom content:
 Processed: -------------------
 Processed: This could also be anything else than a .txt file

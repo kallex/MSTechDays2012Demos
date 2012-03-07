@@ -1,0 +1,59 @@
+﻿<#@ template language="C#" hostspecific="True" debug="True" #>
+<#@ output extension="generated.cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	string ttFileName = Host.TemplateFile;
+	string ttDirectory = Path.GetDirectoryName(ttFileName);
+	string txtFileName = Path.Combine(ttDirectory, Path.GetFileNameWithoutExtension(ttFileName) + ".txt");
+	string[] fileLines = File.ReadAllLines(txtFileName);
+	foreach(string lineContent in fileLines)
+	{
+		CurrContent.ParseLine(lineContent);
+	}
+
+	GenerateContent(CurrContent);
+#>
+	
+<#+
+	class GenClass
+	{
+		public string Name;
+	}
+
+	SourceContent CurrContent = new SourceContent();
+	
+	class SourceContent
+	{
+		public List<GenClass> GenClasses = new List<GenClass>();
+		public void ParseLine(string lineContent)
+		{
+			GenClass classItem = new GenClass { Name = lineContent };
+			GenClasses.Add(classItem);
+		}
+	}
+	
+	void GenerateContent(SourceContent content)
+	{
+		GenerateClasses(content.GenClasses.ToArray());
+	}
+	
+	void GenerateClasses(GenClass[] classArray)
+	{
+		foreach(GenClass classItem in classArray)
+			GenerateClass(classItem);
+	}
+	
+	void GenerateClass(GenClass classItem)
+	{
+		string className = classItem.Name;
+		#>
+	public partial class <#= className #>
+	{
+	}
+		<#+
+	}
+	
+#>

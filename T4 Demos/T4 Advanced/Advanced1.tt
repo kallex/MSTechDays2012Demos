@@ -1,4 +1,4 @@
-<#@ template language="C#" hostspecific="True" debug="True" #>
+﻿<#@ template language="C#" hostspecific="True" debug="True" #>
 <#@ output extension="generated.txt" #>
 <#@ include file="T4Toolbox.tt" #>
 <#@ import namespace="System.IO" #>
@@ -7,7 +7,18 @@
 	string ttFileName = Host.TemplateFile;
 	string ttDirectory = Path.GetDirectoryName(ttFileName);
 	string txtFileName = Path.Combine(ttDirectory, Path.GetFileNameWithoutExtension(ttFileName) + ".txt");
+	string fileContent = File.ReadAllText(txtFileName);
+#>
+// Original
+<#
+	// Manipulating the output content directly
+	this.GenerationEnvironment.Append(fileContent);
 	string[] fileLines = File.ReadAllLines(txtFileName);
+#>
+
+	
+// Processed
+<#
 	foreach(string line in fileLines)
 	{
 		string processedLine = "Processed: " + line;

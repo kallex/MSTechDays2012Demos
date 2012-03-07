@@ -1,0 +1,6 @@
+﻿Customer
+Order
+Orderline
+Customer-Name:string
+Order-Orderlines:List<Orderline>
+Orderline-Price:decimal

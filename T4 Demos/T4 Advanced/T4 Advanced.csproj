@@ -48,6 +48,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Advanced2.tt</DependentUpon>
     </Compile>
+    <Compile Include="Advanced3.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Advanced3.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Advanced4.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Advanced4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Advanced5.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Advanced5.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,10 +76,10 @@
       <Generator>T4ScriptFileGenerator</Generator>
       <LastGenOutput>Advanced1.tt</LastGenOutput>
     </Content>
-    <Content Include="Advanced2.txt">
-      <Generator>T4ScriptFileGenerator</Generator>
-      <LastGenOutput>Advanced2.tt</LastGenOutput>
-    </Content>
+    <Content Include="Advanced2.txt" />
+    <Content Include="Advanced3.txt" />
+    <Content Include="Advanced4.txt" />
+    <Content Include="Advanced5.txt" />
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -77,10 +92,19 @@
     </None>
     <None Include="Advanced2.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Advanced2.txt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <LastGenOutput>Advanced2.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Advanced3.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Advanced3.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Advanced4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Advanced4.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Advanced5.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Advanced5.generated.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

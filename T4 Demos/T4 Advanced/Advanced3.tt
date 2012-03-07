@@ -2,25 +2,43 @@
 <#@ output extension="generated.cs" #>
 <#@ include file="T4Toolbox.tt" #>
 <#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
 
 <#
 	string ttFileName = Host.TemplateFile;
 	string ttDirectory = Path.GetDirectoryName(ttFileName);
 	string txtFileName = Path.Combine(ttDirectory, Path.GetFileNameWithoutExtension(ttFileName) + ".txt");
 	string[] fileLines = File.ReadAllLines(txtFileName);
+	List<GenClass> genClasses = new List<GenClass>();
 	foreach(string className in fileLines)
 	{
-		GenerateClass(className);
+		GenClass genClass = new GenClass { Name = className };
+		genClasses.Add(genClass);
 	}
+	
+	GenerateClasses(genClasses.ToArray());
 #>
 	
 <#+
-	void GenerateClass(string className)
+	class GenClass
 	{
+		public string Name;
+	}
+
+	void GenerateClasses(GenClass[] classArray)
+	{
+		foreach(GenClass classItem in classArray)
+			GenerateClass(classItem);
+	}
+	
+	void GenerateClass(GenClass classItem)
+	{
+		string className = classItem.Name;
 		#>
 	public partial class <#= className #>
 	{
 	}
 		<#+
 	}
+	
 #>
