@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{A9A6DA80-3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationTracker", "Apps\PresentationTracker\PresentationTracker\PresentationTracker.csproj", "{C23084BC-0279-49C3-AFF7-95EC87CE54F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodCallABS", "Abstractions\MethodCallABS\MethodCallABS.csproj", "{5B49BA70-D877-49BF-8437-E709A6FFE9E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,16 @@ Global
 		{C23084BC-0279-49C3-AFF7-95EC87CE54F3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C23084BC-0279-49C3-AFF7-95EC87CE54F3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C23084BC-0279-49C3-AFF7-95EC87CE54F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{5B49BA70-D877-49BF-8437-E709A6FFE9E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B49BA70-D877-49BF-8437-E709A6FFE9E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B49BA70-D877-49BF-8437-E709A6FFE9E1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5B49BA70-D877-49BF-8437-E709A6FFE9E1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5B49BA70-D877-49BF-8437-E709A6FFE9E1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5B49BA70-D877-49BF-8437-E709A6FFE9E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B49BA70-D877-49BF-8437-E709A6FFE9E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B49BA70-D877-49BF-8437-E709A6FFE9E1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5B49BA70-D877-49BF-8437-E709A6FFE9E1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5B49BA70-D877-49BF-8437-E709A6FFE9E1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +70,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B898C2F7-F3ED-4D25-934C-04131CA15808} = {D0EF7B40-E356-470F-886A-5AB58C98950A}
 		{DCFF0C76-64D8-4B16-81D2-C7DCF98AF22C} = {D0EF7B40-E356-470F-886A-5AB58C98950A}
+		{5B49BA70-D877-49BF-8437-E709A6FFE9E1} = {D0EF7B40-E356-470F-886A-5AB58C98950A}
 		{C23084BC-0279-49C3-AFF7-95EC87CE54F3} = {A9A6DA80-3E0B-4139-AC26-5BBEC4AA6EAB}
 	EndGlobalSection
 EndGlobal
