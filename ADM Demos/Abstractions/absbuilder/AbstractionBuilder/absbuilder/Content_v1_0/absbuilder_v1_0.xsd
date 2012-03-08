@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 sp1 (http://www.altova.com) by Kalle Launiala (Citrus Solutions Oy) -->
+<xs:schema xmlns="http://tempuri.org/absbuilder_v1_0.xsd" xmlns:mstns="http://tempuri.org/absbuilder_v1_0.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://tempuri.org/absbuilder_v1_0.xsd" elementFormDefault="qualified" id="absbuilder_v1_0">
+	<xs:element name="AbstractionBuilder" type="AbstractionBuilderType"/>
+	<xs:complexType name="AbstractionBuilderType">
+		<xs:sequence>
+			<xs:element name="Builder" type="BuilderType">
+				<xs:key name="PKAbstraction">
+					<xs:selector xpath="Abstractions/Abstraction"/>
+					<xs:field xpath="@name"/>
+				</xs:key>
+				<xs:key name="PKTransformation">
+					<xs:selector xpath="Transformations/Transformation"/>
+					<xs:field xpath="@name"/>
+				</xs:key>
+				<xs:keyref name="TransAbsSource" refer="PKAbstraction">
+					<xs:selector xpath="Transformations/Transformation"/>
+					<xs:field xpath="@sourceAbstraction"/>
+				</xs:keyref>
+				<xs:keyref name="TransAbsTarget" refer="PKAbstraction">
+					<xs:selector xpath="Transformations/Transformation"/>
+					<xs:field xpath="@targetAbstraction"/>
+				</xs:keyref>
+				<xs:keyref name="BuildItemAbs" refer="PKAbstraction">
+					<xs:selector xpath="BuildExecution/AbstractionItem"/>
+					<xs:field xpath="@nameRef"/>
+				</xs:keyref>
+				<xs:keyref name="BuildItemTrans" refer="PKTransformation">
+					<xs:selector xpath="BuildExecution/TransformationItem"/>
+					<xs:field xpath="@nameRef"/>
+				</xs:keyref>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BuilderType">
+		<xs:sequence>
+			<xs:element name="Abstractions" type="AbstractionsType" minOccurs="0"/>
+			<xs:element name="Transformations" type="TransformationsType" minOccurs="0"/>
+			<xs:element name="BuildExecution" type="BuildExecutionType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AbstractionsType">
+		<xs:sequence>
+			<xs:element name="Abstraction" type="AbstractionType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AbstractionType">
+		<xs:sequence>
+			<xs:element name="Generator" type="GeneratorType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Abstraction name.
+
+Name matches the subdirectory in "Abstractions" root folder.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="GeneratorType">
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Generator class name.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="TransformationsType">
+		<xs:sequence>
+			<xs:element name="Transformation" type="TransformationType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TransformationType">
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Transformation name.
+
+Name matches the subdirectory in "Abstractions" root folder.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="sourceAbstraction" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Source abstraction name.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="targetAbstraction" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Target abstraction name.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="BuildExecutionType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="AbstractionItem" type="AbstractionItemType"/>
+			<xs:element name="TransformationItem" type="TransformationItemType"/>
+			<xs:element name="ExecutionItem" type="ExecutionItemType"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="AbstractionItemType">
+		<xs:attribute name="nameRef" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="TransformationItemType">
+		<xs:attribute name="nameRef" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ExecutionItemType">
+		<xs:attribute name="nameRef" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Name referring to Abstraction
+
+Note! Currently all execution items are required to be within abstraction assemblies.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="className" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Abstraction execute class name.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="methodName" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Executor method name.
+
+Note! Requires to be "public static" method.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>
