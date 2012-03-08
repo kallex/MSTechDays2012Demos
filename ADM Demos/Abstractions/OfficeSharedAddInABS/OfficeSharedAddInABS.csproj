@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DCFF0C76-64D8-4B16-81D2-C7DCF98AF22C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OfficeSharedAddInABS</RootNamespace>
+    <AssemblyName>OfficeSharedAddInABS</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PowerPointAddIn\AssemblyInfo_v1_0.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssemblyInfo_v1_0.tt</DependentUpon>
+    </None>
+    <None Include="PowerPointAddIn\AddInBase_v1_0.designer.cs">
+      <DependentUpon>AddInBase_v1_0.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </None>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Common\CommonCodeblocks.ttinclude" />
+    <None Include="Common\XSDToIncludeGenerator.ttinclude" />
+    <None Include="PowerPointAddIn\AssemblyInfo_v1_0.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyInfo_v1_0.designer.cs</LastGenOutput>
+    </None>
+    <None Include="PowerPointAddIn\Content_v1_0\PowerPointAddIn_v1_0.log">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PowerPointAddIn_v1_0.tt</DependentUpon>
+    </None>
+    <None Include="PowerPointAddIn\Content_v1_0\PowerPointAddIn_v1_0.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PowerPointAddIn_v1_0.xsd</DependentUpon>
+      <LastGenOutput>PowerPointAddIn_v1_0.log</LastGenOutput>
+    </None>
+    <None Include="PowerPointAddIn\Content_v1_0\PowerPointAddIn_v1_0.xsd">
+      <SubType>Designer</SubType>
+      <Generator>T4ScriptFileGenerator</Generator>
+      <LastGenOutput>PowerPointAddIn_v1_0.tt</LastGenOutput>
+    </None>
+    <None Include="PowerPointAddIn\AddInBase_v1_0.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AddInBase_v1_0.designer.cs</LastGenOutput>
+    </None>
+    <None Include="PowerPointAddIn\Documentation_v1_0.doc">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Documentation_v1_0.tt</DependentUpon>
+    </None>
+    <None Include="PowerPointAddIn\Documentation_v1_0.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Documentation_v1_0.doc</LastGenOutput>
+    </None>
+    <None Include="PowerPointAddIn\RegistrationHowTo_v1_0.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RegistrationHowTo_v1_0.txt</LastGenOutput>
+    </None>
+    <None Include="PowerPointAddIn\RegistryKey_v1_0.reg">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistryKey_v1_0.tt</DependentUpon>
+    </None>
+    <None Include="PowerPointAddIn\RegistryKey_v1_0.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RegistryKey_v1_0.reg</LastGenOutput>
+    </None>
+    <None Include="PowerPointAddIn\PowerPointAddIn_v1_0.ttinclude" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PowerPointAddIn\Content_v1_0\PresentationTracker.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="PowerPointAddIn\RegistrationHowTo_v1_0.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistrationHowTo_v1_0.tt</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 sp1 (http://www.altova.com) by Kalle Launiala (Citrus Solutions Oy) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="guid">
+		<xs:annotation>
+			<xs:documentation>The representation of a GUID, generally the id of an element.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="PowerPointAddInAbstraction">
+		<xs:annotation>
+			<xs:documentation>Abstraction for building PowerPoint add-ins.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="PowerPointAddIn" type="PowerPointAddInType" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>PowerPoint add-in required data.</xs:documentation>
+					</xs:annotation>
+					<xs:key name="CommandID">
+						<xs:selector xpath="Commands/Command"/>
+						<xs:field xpath="@name"/>
+					</xs:key>
+					<xs:keyref name="RibbonBarButtonRefCommand" refer="CommandID">
+						<xs:selector xpath="UserInterface/RibbonBar/Tab/ControlGroup/Button"/>
+						<xs:field xpath="@commandOnClick"/>
+					</xs:keyref>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="PowerPointAddInType">
+		<xs:sequence>
+			<xs:element name="Options" type="OptionsType" minOccurs="0"/>
+			<xs:element name="UserInterface" type="UserInterfaceType"/>
+			<xs:element name="Commands" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Commands in the add-in.
+
+The buttons (and other UI elements) must have the command specified on their action.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Command" type="CommandType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Commands defined in the add-in.
+
+Commands can be activated through commandbars, menus and so on.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Events" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Events in the add-in; PowerPoint's events as well as custom defined events are defined here.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Event" type="EventType" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Events defined in the add-in. In addition of PowerPoint exposed events, can later on contain as custom events.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="namespaceName" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Technical namespace where the add-in is compiled.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Name of the add-in.
+
+This is the technical identifying name.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="title" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Add-in title.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="description" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Description of the add-in.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="product" type="xs:string" use="required"/>
+		<xs:attribute name="copyright" type="xs:string" use="required"/>
+		<xs:attribute name="typelibIdentifier" type="guid" use="required">
+			<xs:annotation>
+				<xs:documentation>COM typelib identifier. 
+
+NOTE! Ensure this GUID is unique or specifically defined. 
+
+DO NOT copy this GUID from existing base, unless you know what you are doing.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="assemblyVersion" type="xs:string" default="1.0.0.0">
+			<xs:annotation>
+				<xs:documentation>(Opt = 1.0.0.0) AssemblyVersion of AddIn.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="assemblyFileversion" type="xs:string" use="optional" default="1.0.0.0">
+			<xs:annotation>
+				<xs:documentation>(Opt = 1.0.0.0) AssemblyFileVersion of AddIn.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="designDocumentation" type="xs:string" default="">
+			<xs:annotation>
+				<xs:documentation>(Opt = empty) Design level documentation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="OptionsType">
+		<xs:attribute name="userSpecificConfig" type="xs:boolean" default="false">
+			<xs:annotation>
+				<xs:documentation>(Opt = false) Use user-specific configuration.
+
+Generates code for user-specific configuration management.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="UserInterfaceType">
+		<xs:sequence>
+			<xs:element name="RibbonBar">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Tab" type="TabType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ControlGroupType">
+		<xs:choice maxOccurs="unbounded">
+			<xs:element name="Button" type="ButtonType">
+				<xs:annotation>
+					<xs:documentation>KÄYTÄ TÄTÄ YLEENSÄ.
+
+Ribbonbar button. Can contain icon (small or large) or text label. Requires matching "Command" to be defined for click.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CheckBox" type="CheckBoxType">
+				<xs:annotation>
+					<xs:documentation>Ribbonbar checkbox. Contains label as text. Fixed or dynamic initial checked state and enabled state as well.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Misc" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Any XML content to fill in control section.
+
+Generated as-is, so anything that Office RibbonUI XML supports, goes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Item name. Used as unique ID in code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="label" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Visible label in UI.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="designDocumentation" type="xs:string" default="">
+			<xs:annotation>
+				<xs:documentation>(Opt = empty) Design level documentation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="TabType">
+		<xs:sequence>
+			<xs:element name="ControlGroup" type="ControlGroupType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Item name. Used as unique ID in code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="label" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Visible label in UI.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="designDocumentation" type="xs:string" default="">
+			<xs:annotation>
+				<xs:documentation>(Opt = empty) Design level documentation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ButtonType">
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Item name. Used as unique ID in code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="label" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Visible label in UI.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="commandOnClick" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Command executed on click.
+
+Generates code hooks to execute the proper command defined separately in "Commands" section.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="size" default="normal">
+			<xs:annotation>
+				<xs:documentation>(Opt = normal) Size of the button.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="normal"/>
+					<xs:enumeration value="large"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="officeGalleryIcon">
+			<xs:annotation>
+				<xs:documentation>(Opt = none) Office Gallery Icon.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="none"/>
+					<xs:enumeration value="HappyFace"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="designDocumentation" type="xs:string" default="">
+			<xs:annotation>
+				<xs:documentation>(Opt = empty) Design level documentation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="CheckBoxType">
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Item name. Used as unique ID in code.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="label" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Visible label in UI.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="isEnabled" use="required">
+			<xs:annotation>
+				<xs:documentation>Is checkbox enabled: True/False/Dynamic (not currently supported).</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="True">
+						<xs:annotation>
+							<xs:documentation>Checkbox is always enabled.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="False">
+						<xs:annotation>
+							<xs:documentation>Checkbox is always disabled.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Dynamic">
+						<xs:annotation>
+							<xs:documentation>Note! Not currently supported.
+
+Checkbox isEnabled state is requested by appropriate method callback to bool StateHandlerImpl.CheckBox_[Name]_GetEnabledState()</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="initialCheckedState" use="required">
+			<xs:annotation>
+				<xs:documentation>Checkbox initial checked state: Checked/UnChecked/Dynamic</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Checked">
+						<xs:annotation>
+							<xs:documentation>Checkbox is initially checked.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="UnChecked">
+						<xs:annotation>
+							<xs:documentation>Checkbox is initially unchecked.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Dynamic">
+						<xs:annotation>
+							<xs:documentation>Checkbox initial check state is retrieved from callback bool StateHandlerImp.CheckBox_[Name]_GetInitialCheckedState()</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="designDocumentation" type="xs:string" default="">
+			<xs:annotation>
+				<xs:documentation>(Opt = empty) Design level documentation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="superTip" type="xs:string" default="">
+			<xs:annotation>
+				<xs:documentation>(Opt = empty) Supertip kind of a tooltip of the checkbox.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="CommandType">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="designDocumentation" type="xs:string" default="">
+			<xs:annotation>
+				<xs:documentation>(Opt = empty) Design level documentation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="EventType">
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Events name.
+
+This name is used as event code generation to identify the event in the code as well.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="powerPointEvent" use="required">
+			<xs:annotation>
+				<xs:documentation>PowerPoint event type.
+
+Generates code hook for method implementing this event. Registers and unregisters the event automatically.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="AfterNewPresentation">
+						<xs:annotation>
+							<xs:documentation>Occurs after a presentation is created.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="AfterPresentationOpen">
+						<xs:annotation>
+							<xs:documentation>Occurs after an existing presentation is opened.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="ColorSchemeChanged">
+						<xs:annotation>
+							<xs:documentation>Occurs after a color scheme is changed.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="NewPresentation">
+						<xs:annotation>
+							<xs:documentation>Occurs after a presentation is created, as it is added to the Presentations collection.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PresentationBeforeSave">
+						<xs:annotation>
+							<xs:documentation>Occurs before a presentation is saved.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PresentationClose">
+						<xs:annotation>
+							<xs:documentation>Occurs immediately before any open presentation closes, as it is removed from the Presentations collection.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PresentationNewSlide">
+						<xs:annotation>
+							<xs:documentation>Occurs when a new slide is created in any open presentation, as the slide is added to the Slides collection.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PresentationOpen">
+						<xs:annotation>
+							<xs:documentation>Occurs after an existing presentation is opened, as it is added to the Presentations collection.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PresentationPrint">
+						<xs:annotation>
+							<xs:documentation>Occurs before a presentation is printed.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PresentationSave">
+						<xs:annotation>
+							<xs:documentation>Occurs before any open presentation is saved.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PresentationSync">
+						<xs:annotation>
+							<xs:documentation>Occurs when the local copy of a presentation that is part of a Document Workspace is synchronized with the copy on the server. Provides important status information regarding the success or failure of the synchronization of the presentation.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SlideSelectionChanged">
+						<xs:annotation>
+							<xs:documentation>Occurs at different times depending on the current view.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SlideShowBegin">
+						<xs:annotation>
+							<xs:documentation>Occurs when you start a slide show.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SlideShowEnd">
+						<xs:annotation>
+							<xs:documentation>Occurs after a slide show ends, immediately after the last SlideShowNextSlide event occurs.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SlideShowNextBuild">
+						<xs:annotation>
+							<xs:documentation>Occurs upon mouse-click or timing animation, but before the animated object becomes visible. .</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SlideShowNextClick">
+						<xs:annotation>
+							<xs:documentation>Occurs on the next click of the slide.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SlideShowNextSlide">
+						<xs:annotation>
+							<xs:documentation>Occurs immediately before the transition to the next slide. For the first slide, occurs immediately after the SlideShowBegin event.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SlideShowOnNext">
+						<xs:annotation>
+							<xs:documentation>Occurs when the user clicks Next to move within the current slide.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SlideShowOnPrevious">
+						<xs:annotation>
+							<xs:documentation>Occurs when the user clicks Previous to move within the current slide.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WindowActivate">
+						<xs:annotation>
+							<xs:documentation>Occurs when the application window or any document window is activated.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WindowBeforeDoubleClick">
+						<xs:annotation>
+							<xs:documentation>Occurs when you double-click the items in the views listed in the following table.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WindowBeforeRightClick">
+						<xs:annotation>
+							<xs:documentation>Occurs when you right-click a shape, a slide, a notes page, or some text. This event is triggered by the MouseUp event.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WindowDeactivate">
+						<xs:annotation>
+							<xs:documentation>Occurs when the application window or any document window is deactivated.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WindowSelectionChange">
+						<xs:annotation>
+							<xs:documentation>Occurs when the selection of text, a shape, or a slide in the active document window changes, whether in the user interface or in code.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="throttleTimeInSeconds" type="xs:int" default="0">
+			<xs:annotation>
+				<xs:documentation>(Opt = 0) Throttles the event calling automatically. In case of repetitive events, throttles the event calling to occurr at maximum rate defined here.
+
+Note! Not yet supported in generator, can be used as design information for now.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="designDocumentation" type="xs:string" default="">
+			<xs:annotation>
+				<xs:documentation>(Opt = empty) Design level documentation.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="logEvent" default="EiLogiteta">
+			<xs:annotation>
+				<xs:documentation>(Opt = EiLogiteta) Logittaa eventin, jos tämä on asetettu.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="EiLogiteta"/>
+					<xs:enumeration value="LogitetaanPaikallisesti"/>
+					<xs:enumeration value="LogitetaanPalvelimelle">
+						<xs:annotation>
+							<xs:documentation>LOGITETAAN JULKISELLE PALVELIMELLE!</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

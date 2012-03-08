@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by Kalle Launiala (Citrus Solutions Oy) -->
+<PowerPointAddInAbstraction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PowerPointAddIn_v1_0.xsd">
+  <PowerPointAddIn title="PresentationTracker AddIn" name="PresentationTrackerDemo" typelibIdentifier="A018A1FA-745B-4A7E-AA69-D9B396075576" product="PresentationTracker Demo Abstracted Add-In" description="" namespaceName="PresentationTracker" copyright=""
+                   designDocumentation="PresentationTracker - initially made for Microsoft TechDays 2011 in Finland to Tweet during the presentations. Made for demonstrating the abstractions, and still serving for that purpose." >
+    <Options userSpecificConfig="true"/>
+    <UserInterface>
+      <RibbonBar>
+        <Tab name="PresentationTrackerDemo" label="Presentation Tracker Demo">
+          <ControlGroup name="General" label="General" designDocumentation="General controls reside here.">
+            <Button commandOnClick="VerifyPIN" label="Verify Twitter PIN" officeGalleryIcon="HappyFace" size="normal" name="VerifyPIN"/>
+            <Button commandOnClick="SetSubject" label="Set Subject" officeGalleryIcon="HappyFace" size="normal" name="SetSubject"/>
+            <Button commandOnClick="OpenTwitterInBrowser" label="Open Twitter" name="OpenTwitter" officeGalleryIcon="HappyFace" size="large" 
+                    designDocumentation="Open Twitter when clicked"/>
+            <CheckBox name="TweetingEnabled" initialCheckedState="Dynamic" isEnabled="True" label="Tweeting Enabled" designDocumentation="Toggles Tweeting on/off. Stores the information in user-specific options. "
+                       superTip="Tweeting toggler, Supertip Yippee!"/>
+          </ControlGroup>
+        </Tab>
+      </RibbonBar>
+    </UserInterface>
+    <Commands>
+      <Command name="VerifyPIN" designDocumentation="Verifies the PIN configuration"/>
+      <Command name="SetSubject" designDocumentation="Subject to add in presentation tweet"/>
+      <!-- Open Twitter Example Commented below -->
+      <!--<Command name="OpenTwitterInBrowser" designDocumentation="Opens Twitter in browser"/>-->
+      <Command name="OpenTwitterInBrowser" designDocumentation="Open Twitter in the default browser."/>
+    </Commands>
+    <Events>
+      <!-- Exercise: Warn also for new presentation (especially important when making new presentations - as the Tweeting is likely forgotten!) -->
+      <!-- Example commented out below -->
+      <!--<Event name="WarnForTweeterOnNew" powerPointEvent="AfterNewPresentation" designDocumentation="Warns the user for Tweeting, when new presentation is created."/>-->
+      <Event name="WarnForTweeterOnNew" powerPointEvent="AfterNewPresentation" designDocumentation="Warns the user for the Tweeter, when new presentation is created."/>
+      <Event name="WarnForTweeter" powerPointEvent="PresentationOpen" designDocumentation="Warns the user for Tweeting tracker being installed and active."/>
+    </Events>
+  </PowerPointAddIn>
+</PowerPointAddInAbstraction>

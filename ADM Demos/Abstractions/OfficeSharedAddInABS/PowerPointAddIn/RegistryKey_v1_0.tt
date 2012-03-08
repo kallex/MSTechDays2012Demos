@@ -1,0 +1,47 @@
+﻿Windows Registry Editor Version 5.00
+<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".reg" encoding="UNICODE" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="..\Common\CommonCodeblocks.ttinclude" #>
+<#@ include file="PowerPointAddIn_v1_0.ttinclude" #>
+<#   
+	string templateDirectoryName = Path.GetDirectoryName(Host.TemplateFile);
+	string directoryName = templateDirectoryName + @"\Content_v1_0";
+	string[] xmlFileNames = Directory.GetFiles(directoryName, "*.xml");
+	
+	foreach(string xmlFileName in xmlFileNames)
+	{
+		PowerPointAddIn_v1_0.PowerPointAddInAbstraction abstraction = LoadXml<PowerPointAddIn_v1_0.PowerPointAddInAbstraction>(xmlFileName);
+		GenerateRegistryKey(abstraction);
+	}
+#>
+<#+ 
+	void GenerateRegistryKey(PowerPointAddIn_v1_0.PowerPointAddInAbstraction abstraction)
+	{
+		PowerPointAddIn_v1_0.PowerPointAddInType addIn = abstraction.PowerPointAddIn;
+		string addInName = addIn.name;
+		string keyfileName = addInName + ".snk";
+		string friendlyName = addIn.product;
+		string description = addIn.description;
+		string keyName = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office\PowerPoint\Addins\" + addInName + ".Connect";
+#>
+[<#= keyName #>]
+"FriendlyName"="<#= friendlyName #>"
+"Description"="<#= description #>"
+"LoadBehavior"=dword:00000003
+"CommandLineSafe"=dword:00000000
+		<#+
+	}	
+#>

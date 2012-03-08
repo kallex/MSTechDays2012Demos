@@ -1,0 +1,6 @@
+﻿ 
+These modifications only have to be done once after the name of the AddIn has been changed
+1. Open "PowerPointAddIn" folder under Abstraction project with "Windows Explorer"
+2. Double click the saved .reg file in Windows Explorer
+3. Locate your assembly that has been built in Administrator command prompt
+4. Register the COM add in with a command "regasm /codebase <your assembly name here>"		
