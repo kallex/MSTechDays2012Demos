@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2011 rel. 2 sp1 (http://www.altova.com) by Kalle Launiala (Citrus Solutions Oy) -->
+<xs:schema xmlns="http://tempuri.org/AbstractionOptions.xsd" xmlns:mstns="http://tempuri.org/AbstractionOptions.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://tempuri.org/AbstractionOptions.xsd" elementFormDefault="qualified" id="AbstractionOptions">
+	<xs:element name="AbstractionOptions" type="AbstractionOptionsType"/>
+	<xs:complexType name="GeneralType">
+		<xs:attribute name="shareLevel" use="required">
+			<xs:annotation>
+				<xs:documentation>Abstraction sharing level.
+
+Local = Project private; content with generators
+
+Shared = Content separated from generators
+
+Modular = Content separated, generator run order controlled</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Local">
+						<xs:annotation>
+							<xs:documentation>Local = Content and generated output is placed alongside templates in the same subdirectory in source control
+
+This is simplest mode of abstraction and doesn't require managing content or output separately. 
+
+Because content and generator logic is bound together, it is not feasible to share this model between projects.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Shared">
+						<xs:annotation>
+							<xs:documentation>Shared = Content and generated output is placed separately from the templates.
+
+This mode allows sharing and collaborating on updating the abstraction through standard version control system branching/merging.
+
+The transform/generators are launched within the IDE as with local mode.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Modular">
+						<xs:annotation>
+							<xs:documentation>Modular = Shared abstractions where generators are run in separate build process.
+
+In addition to shared mode, this mode allows combining the abstractions together in logically controlled manner.
+
+The transform/generators are run in separate control flow that allows customizing the order.</xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="AbstractionOptionsType">
+		<xs:sequence>
+			<xs:element name="General" type="GeneralType"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

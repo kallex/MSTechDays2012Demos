@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassModelAbstraction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ClassModel_v1_0.xsd">
+  <Classes namespaceName="DemoNamespace">
+    <Class name="DemoClass" designDesc="Design level description">
+      <Properties>
+        <Property dataType="string" isAutoProperty="true" name="TestProperty1"/>
+        <Property dataType="string" isAutoProperty="true" name="TestProperty2"/>
+      </Properties>
+    </Class>
+  </Classes>
+           
+</ClassModelAbstraction>

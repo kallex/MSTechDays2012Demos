@@ -1,0 +1,117 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".designer.cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="..\..\abscommon\CommonInclude\Common\CommonCodeblocks.ttinclude" #>
+<#@ include file="ClassModel_v1_0.ttinclude" #>
+<#   
+	// Set abstraction specific type and single file specific extension
+	TransformGenerator< ClassModelAbstractionType >(GenerateRoot, ".designer.cs");	
+#>
+<#+ 
+	void SetCurrentAbstraction(object abs)
+	{
+		CurrentAbstraction = ( ClassModelAbstractionType ) abs;
+	}
+	
+	ClassModelAbstractionType CurrentAbstraction;
+	
+	void GenerateRoot()
+	{
+		GenerateAbstraction(CurrentAbstraction);
+	}
+	
+	void GenerateAbstraction(ClassModelAbstractionType abstraction)
+	{
+		foreach(var classesItem in abstraction.Classes)
+			GenerateClasses(classesItem);
+	}	
+	
+	void GenerateClasses(ClassesType classes)
+	{
+		#>
+				using System;
+
+		namespace <#= classes.namespaceName #> {
+			<#+
+		foreach(var classItem in classes.Class)
+		{
+			#>
+			public partial class <#= classItem.name #> {
+				<#+ GenerateProperties(classItem.Properties); #>
+				<#+ GenerateMethods(classItem.Methods); #>
+			}
+			<#+
+		}
+			#>
+		}
+		<#+
+	}
+	
+	void GenerateMethods(MethodType[] methods)
+	{
+		if(methods == null)
+			return;
+		foreach(MethodType method in methods)
+		{
+			if(method.Implementation != null)
+			{
+				GenerateMethodWithImplementation(method);
+			} else {
+				GenerateMethod(method);
+			}
+		}
+	}
+	
+	void GenerateMethodWithImplementation(MethodType method)
+	{
+		ImplementationType outputToGenerate = method.Implementation.FirstOrDefault(impl => impl.language == ImplementationTypeLanguage.C1);
+		if(outputToGenerate == null)
+			return;
+		#>
+		<#= outputToGenerate.Value ?? "" #>
+		<#+
+
+	}
+	
+	void GenerateMethod(MethodType method)
+	{
+		throw new NotSupportedException("Methods without implementation not yet supported");
+	}
+	
+	void GenerateProperties(PropertyType[] properties)
+	{
+		
+		foreach(var prop in properties)
+		{
+			bool isAuto = prop.isAutoProperty;
+			if(isAuto) {
+				
+		#>
+			public <#= prop.dataType #> <#= prop.name #> { get; set; }
+		<#+
+			} else
+			{
+		#>
+			public <#= prop.dataType #> <#= prop.name #> 
+			{ 
+				get { return <#= prop.name #>Getteri(this); }
+				set { <#= prop.name #>Setteri(value); }
+			}
+		
+		<#+
+			}
+		}
+	}
+#>

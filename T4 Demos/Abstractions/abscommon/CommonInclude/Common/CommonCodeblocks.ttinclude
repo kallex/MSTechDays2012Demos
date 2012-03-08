@@ -1,0 +1,128 @@
+﻿<#@ include file="AbstractionOptions_namespace.ttinclude" #>
+<#+ 
+	enum AbstractionShareLevel
+	{
+		Local,
+		Shared,
+		Modular,
+	}
+	
+	bool IsLocal
+	{
+		get {
+			return ShareLevel == AbstractionOptions.GeneralTypeShareLevel.Local;
+		}
+	}
+	
+	AbstractionOptions.AbstractionOptionsType CurrentOptions;
+	AbstractionOptions.GeneralTypeShareLevel ShareLevel {
+		get {
+			return CurrentOptions.General.shareLevel;
+		}
+	}
+	
+	void TransformGenerator<AbstractionType>(Action rootLevelGenerator, string sharedSingleFileExtension)
+	{
+		// Abstraction(s) that are supposed to be shared must be shared by default.
+		// This is simply because any change to "shared" makes it modified compared to the shared version.
+		// Thus making abstraction "local" allows also making the changes that make it behave like "local".
+		// To make the abstraction "local" make following changes:
+		// 1. Modify the output - directive right on top of the file (2nd line) from "?" to ".designer.cs"
+		// 2. Set the AbstractionShareLevel below to Shared 
+		// 3. After the changes, the abstraction starts to generate its output right below the template:
+		// - Change the .cs file properties so that it doesn't compile in the abstraction-project
+		// - Link the output .cs file to appropriate projects (to replace the links from AbstractionContent/Out directory)
+		// 4. If necessary, copy over and alter the include-files specified for common includes
+		
+		// ShareLevel = AbstractionShareLevel.Shared;
+		
+		string templateDirectoryPath = Path.GetDirectoryName(Host.TemplateFile);
+		DirectoryInfo dirInfo = new DirectoryInfo(templateDirectoryPath);
+		dirInfo = dirInfo.Parent;
+		string optionsFile = Path.Combine(dirInfo.FullName, "Options.xml");
+		CurrentOptions = LoadXml<AbstractionOptions.AbstractionOptionsType>(optionsFile);
+
+		if(ShareLevel != AbstractionOptions.GeneralTypeShareLevel.Modular)
+		{
+			string directoryName = GetContentDirectoryFromTemplateFullPath(Host.TemplateFile, IsLocal == false);
+			string[] xmlFileNames = Directory.GetFiles(directoryName, "*.xml");
+			
+			foreach(string xmlFileName in xmlFileNames)
+			{
+				AbstractionType current = LoadXml<AbstractionType>(xmlFileName);
+				SetCurrentAbstraction(current);
+				rootLevelGenerator();
+			}
+		} 
+		else
+		{
+			rootLevelGenerator();
+		}
+		
+		if(ShareLevel == AbstractionOptions.GeneralTypeShareLevel.Shared)
+		{
+			WriteContentToSingleOutput(Host.TemplateFile, sharedSingleFileExtension);
+		}
+	}
+	
+	
+	string GetContentDirectoryFromTemplateFullPath(string templateFullPath, bool isShared)
+	{
+		string templateDirectoryName = Path.GetDirectoryName(templateFullPath);
+		string contentDir =  isShared ? @"In\Content_v1_0" : "Content_v1_0";
+		string directoryName = Path.Combine(templateDirectoryName, contentDir);
+		if(isShared) {
+			System.IO.DirectoryInfo absRootDirInfo = new System.IO.DirectoryInfo(templateDirectoryName);
+			absRootDirInfo = absRootDirInfo.Parent;
+			string abstractionName = absRootDirInfo.Name;
+			directoryName = directoryName.Replace(abstractionName, "AbstractionContent");
+		}
+		return directoryName;
+	}
+	
+	void WriteContentToSingleOutput(string templateFullPath, string extension)
+	{
+		string templateDirectoryName = Path.GetDirectoryName(templateFullPath);
+		string contentDir = "Out";
+		string directoryName = Path.Combine(templateDirectoryName, contentDir);
+		string contentFileName = System.IO.Path.GetFileNameWithoutExtension(templateFullPath) + extension;
+		System.IO.DirectoryInfo absRootDirInfo = new System.IO.DirectoryInfo(templateDirectoryName);
+		absRootDirInfo = absRootDirInfo.Parent;
+		string abstractionName = absRootDirInfo.Name;
+		directoryName = directoryName.Replace(abstractionName, "AbstractionContent");
+		string contentFullName = Path.Combine(directoryName, contentFileName);
+		string contentData = this.GenerationEnvironment.ToString();
+		this.GenerationEnvironment.Clear();
+		File.WriteAllText(contentFullName, contentData);
+	}
+
+	T LoadXml<T>(string xmlFileName) {
+		using(FileStream fStream = File.OpenRead(xmlFileName)) {
+			XmlSerializer serializer = new XmlSerializer(typeof(T));
+			T result = (T) serializer.Deserialize(fStream);
+			fStream.Close();
+			return result;
+		}
+	}
+
+	void BeginNamespace(string namespaceName) {
+		#>namespace <#= namespaceName #> { 
+		<#+ 
+	}
+
+	void EndBlock() {
+		#> } <#+
+	}
+
+		
+	static string RemoveScands(string sourceString) {
+		return sourceString.Replace('ä', 'a').Replace('Ä', 'A').Replace('å', 'a').Replace('Å', 'A').Replace('ö', 'o').Replace('Ö', 'O');
+	}
+	
+	public class GenerationItem
+	{
+		public string FileName;
+		public string Content;
+	}
+	
+#>

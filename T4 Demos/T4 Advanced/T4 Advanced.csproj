@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Abstractions\ClassModelABS\ClassModel\CSharpClassGenerator_v1_0.designer.cs">
+      <Link>Advanced6_ADM\CSharpClassGenerator_v1_0.designer.cs</Link>
+    </Compile>
     <Compile Include="Advanced2.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -67,6 +70,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\Abstractions\ClassModelABS\ClassModel\Content_v1_0\ClassModelABSDemo.xml">
+      <Link>Advanced6_ADM\ClassModelABSDemo.xml</Link>
+    </Content>
     <Content Include="Advanced1.generated.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

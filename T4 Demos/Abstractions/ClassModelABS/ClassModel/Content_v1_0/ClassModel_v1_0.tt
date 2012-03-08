@@ -1,0 +1,14 @@
+<#@ template language="C#" hostspecific="True" debug="True" #>
+<#@ output extension="?" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ include file="..\..\..\abscommon\CommonInclude\Common\XSDToIncludeGenerator.ttinclude" #>
+<#
+	System.IO.DirectoryInfo dirInfo = new System.IO.DirectoryInfo(System.IO.Path.GetDirectoryName(Host.TemplateFile));
+	// Generate the include files to parent directory, not in the content directory
+	dirInfo = dirInfo.Parent;
+	// Generating the T4 generator usable no-namespace include with T4 tags
+	GenerateTTInclude(Host.TemplateFile, dirInfo.FullName);		
+	// Generating the Transformation usable namespace include without T4 tags 
+	GenerateTTInclude(Host.TemplateFile, dirInfo.FullName, generateNamespace : true, generateT4Tags : false);
+#>
+								
