@@ -10,3 +10,5 @@ Basic7 : .ttinclude file includes
 Basic8 : TextTemplatingFileGenerator vs TextTemplatingFilePreprocessor
 	- Note the difference between <# #> and <#+ #>
 
+(Basic9 - requires VS SDK - not included in the build) : Custom host for preprocessed template running
+	- Allows running TextTemplatingFilePreprocessor generated templates from code

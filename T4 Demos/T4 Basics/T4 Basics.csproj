@@ -48,6 +48,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Basics8.tt</DependentUpon>
     </Compile>
+    <None Include="CustomCmdLineHost_notcompiling.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
