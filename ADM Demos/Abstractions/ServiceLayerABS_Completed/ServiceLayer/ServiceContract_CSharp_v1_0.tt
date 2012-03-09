@@ -1,0 +1,125 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".designer.cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="..\..\abscommon\CommonInclude\Common\CommonCodeblocks.ttinclude" #>
+<#@ include file="ServiceLayer_v1_0.ttinclude" #>
+<#@ include file="CommonInclude.ttinclude" #>
+<#   
+	// Set abstraction specific type and single file specific extension
+	TransformGenerator< ServiceLayerAbstractionType >(GenerateRoot, ".designer.cs");	
+#>
+<#+ 
+	void SetCurrentAbstraction(object abs)
+	{
+		CurrentAbstraction = ( ServiceLayerAbstractionType ) abs;
+	}
+	
+	ServiceLayerAbstractionType CurrentAbstraction;
+	
+	void GenerateRoot()
+	{
+		GenerateAbstraction(CurrentAbstraction);
+	}
+	
+	void GenerateAbstraction(ServiceLayerAbstractionType abstraction)
+	{
+		#>
+using System.ServiceModel;
+		<#+
+		foreach(ServicesType services in abstraction.Services ?? new ServicesType[0])
+			GenerateServices(services);
+	}	
+	
+	void GenerateServices(ServicesType services)
+	{
+		#>
+// Services
+namespace <#= services.contractNamespaceName #> {
+		<#+
+		foreach(var service in services.Service ?? new ServiceType[0])
+			GenerateServiceContract(service);
+		
+		foreach(var compositeType in services.CompositeType ?? new CompositeTypeType[0])
+			GenerateCompositeType(compositeType);
+		#>
+}
+		<#+
+	}
+
+	void GenerateServiceContract(ServiceType service)
+	{
+		string serviceInterfaceName = GetServiceInterfaceName(service.name);
+		#>
+    [ServiceContract]
+    public interface <#= serviceInterfaceName #>
+    {
+
+		<#+
+		foreach(var method in service.Method ?? new MethodType[0])
+			GenerateMethodContract(method);
+			
+		#>
+    }
+		
+		<#+
+	}
+	
+	void GenerateMethodContract(MethodType method)
+	{
+		string returnValueStr = String.IsNullOrEmpty(method.returnValueType) ? "void" : method.returnValueType;
+		string paramDeclarationStr = GetParameterDeclarationString(method.Parameter);
+		string methodName = method.name;
+		#>
+        [OperationContract]
+        <#= returnValueStr #> <#= methodName #>(<#= paramDeclarationStr #>);
+		
+		<#+
+	}
+	
+	void GenerateCompositeType(CompositeTypeType compositeType)
+	{
+		#>
+    [DataContract]
+    public class <#= compositeType.name #>
+    {
+		<#+
+			foreach(var property in compositeType.Property ?? new PropertyType[0])
+				GenerateProperty(property);
+		#>
+	}
+		<#+
+	}
+	
+	void GenerateProperty(PropertyType property)
+	{
+		string privateFieldName = "_" + property.name;
+		string propertyType = property.dataType;
+		string propertyName = property.name;
+		string initialization = String.IsNullOrEmpty(property.initializationExpression) ? "" :
+			" = " + property.initializationExpression;
+		#>
+        <#= propertyType #> <#= privateFieldName #><#= initialization #>;
+
+        [DataMember]
+        public bool <#= propertyName #>
+        {
+            get { return <#= privateFieldName #>; }
+            set { <#= privateFieldName #> = value; }
+        }
+		<#+
+	}
+	
+		
+#>

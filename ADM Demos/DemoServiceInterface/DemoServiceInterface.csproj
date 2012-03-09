@@ -43,8 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Abstractions\ServiceLayerABS\ServiceLayer\ServiceContract_CSharp_v1_0.designer.cs">
-      <Link>ADM\ServiceContract_CSharp_v1_0.designer.cs</Link>
+      <Link>ADM Automation\ServiceContract_CSharp_v1_0.designer.cs</Link>
     </Compile>
+    <Compile Include="..\Abstractions\ServiceLayerABS_Completed\ServiceLayer\ServiceContract_CSharp_v1_0.designer.cs">
+      <Link>ADM Complete Demo\ServiceContract_CSharp_v1_0.designer.cs</Link>
+    </Compile>
+    <Compile Include="ADMCompositeType.cs" />
+    <Compile Include="DemoCompositeType.cs" />
     <Compile Include="IADMService.cs" />
     <Compile Include="IDemoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +57,9 @@
   <ItemGroup>
     <Content Include="..\Abstractions\ServiceLayerABS\ServiceLayer\Content_v1_0\ServiceLayerContent.xml">
       <Link>ADM Automation\ServiceLayerContent.xml</Link>
+    </Content>
+    <Content Include="..\Abstractions\ServiceLayerABS_Completed\ServiceLayer\Content_v1_0\ServiceLayerContent.xml">
+      <Link>ADM Complete Demo\ServiceLayerContent.xml</Link>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

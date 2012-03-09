@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using DemoServiceInterface;
 
 namespace WCFServiceDemo
 {
@@ -16,7 +17,7 @@ namespace WCFServiceDemo
             return string.Format("You entered: {0}", value);
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public DemoCompositeType GetDataUsingDataContract(DemoCompositeType composite)
         {
             if (composite == null)
             {

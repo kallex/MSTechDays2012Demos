@@ -1,0 +1,24 @@
+﻿<#+ 
+	string GetParameterCallString(ParameterType[] parameters)
+	{
+		if(parameters == null || parameters.Length == 0)
+			return "";
+		string[] paramArray = parameters.Select(par => par.name).ToArray();
+		return String.Join(", ", paramArray);
+	}
+	
+	string GetParameterDeclarationString(ParameterType[] parameters)
+	{
+		if(parameters == null || parameters.Length == 0)
+			return "";
+		string[] paramArray = parameters.Select(par => par.dataType + " " + par.name).ToArray();
+		return String.Join(", ", paramArray);
+	}
+	
+	string GetServiceInterfaceName(string serviceName)
+	{
+		return "I" + serviceName;
+	}
+	
+
+#>

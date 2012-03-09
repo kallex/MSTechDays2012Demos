@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ServiceModel;
+using ADMDemoCompleteClient;
 using WCFServiceDemo;
 
 namespace WCFClientDemo
@@ -15,6 +16,8 @@ namespace WCFClientDemo
             Console.WriteLine(demoServiceResponse);
             string admServiceResponse = ADMServiceClient.GetData(333);
             Console.WriteLine(admServiceResponse);
+            string admCompletedServiceResponse = ADMCompletedDemoServiceClient.GetData(123, 345);
+            Console.WriteLine(admCompletedServiceResponse);
             Console.ReadLine();
         }
     }

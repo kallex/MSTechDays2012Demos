@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceLayerAbstraction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ServiceLayer_v1_0.xsd">
+  <Services contractNamespaceName="ADMDemoCompleteContract" clientNamespaceName="ADMDemoCompleteClient" serverNamespaceName="ADMDemoCompleteServer">
+    <Service name="ADMCompletedDemoService">
+      <Method name="GetData" returnValueType="string">
+        <Parameter name="value" dataType="int"/>
+        <Parameter name="value2" dataType="int"/>
+      </Method>
+    </Service>
+  </Services>
+</ServiceLayerAbstraction>

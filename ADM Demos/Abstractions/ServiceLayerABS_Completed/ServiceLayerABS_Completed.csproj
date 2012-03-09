@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5B49BA70-D877-49BF-8437-E709A6FFE9E1}</ProjectGuid>
+    <ProjectGuid>{92451B64-CB7D-4240-9982-3D7AD9823872}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ServiceLayerABS</RootNamespace>
@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="ServiceLayer\CommonInclude.ttinclude" />
     <None Include="ServiceLayer\ServiceServer_CSharp_v1_0.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ServiceServer_CSharp_v1_0.designer.cs</LastGenOutput>
@@ -72,6 +71,7 @@
     <Content Include="ServiceLayer\Content_v1_0\ServiceLayerContent.xml">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="ServiceLayer\CommonInclude.ttinclude" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ServiceLayer\Content_v1_0\ServiceLayer_v1_0.tt">

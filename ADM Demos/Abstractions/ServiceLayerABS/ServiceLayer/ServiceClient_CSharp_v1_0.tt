@@ -15,6 +15,7 @@
 <#@ import namespace="System.Collections.Generic" #> 
 <#@ include file="..\..\abscommon\CommonInclude\Common\CommonCodeblocks.ttinclude" #>
 <#@ include file="ServiceLayer_v1_0.ttinclude" #>
+<#@ include file="CommonInclude.ttinclude" #>
 <#   
 	// Set abstraction specific type and single file specific extension
 	TransformGenerator< ServiceLayerAbstraction >(GenerateRoot, ".designer.cs");	

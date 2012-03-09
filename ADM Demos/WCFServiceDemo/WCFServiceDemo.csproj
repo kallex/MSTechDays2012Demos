@@ -56,7 +56,11 @@
     <Content Include="..\Abstractions\ServiceLayerABS\ServiceLayer\Content_v1_0\ServiceLayerContent.xml">
       <Link>ADM Automation\ServiceLayerContent.xml</Link>
     </Content>
+    <Content Include="..\Abstractions\ServiceLayerABS_Completed\ServiceLayer\Content_v1_0\ServiceLayerContent.xml">
+      <Link>ADM Complete Demo\ServiceLayerContent.xml</Link>
+    </Content>
     <Content Include="ADMService.svc" />
+    <Content Include="ADMCompletedDemoService.svc" />
     <Content Include="DemoService.svc" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -68,12 +72,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Abstractions\ServiceLayerABS\ServiceLayer\ServiceServer_CSharp_v1_0.designer.cs">
-      <Link>ADM\ServiceServer_CSharp_v1_0.designer.cs</Link>
+      <Link>ADM Automation\ServiceServer_CSharp_v1_0.designer.cs</Link>
+    </Compile>
+    <Compile Include="..\Abstractions\ServiceLayerABS_Completed\ServiceLayer\ServiceServer_CSharp_v1_0.designer.cs">
+      <Link>ADM Complete Demo\ServiceServer_CSharp_v1_0.designer.cs</Link>
     </Compile>
     <Compile Include="ADMService.svc.cs">
       <DependentUpon>ADMService.svc</DependentUpon>
     </Compile>
     <Compile Include="BusinessLogicHandler.cs" />
+    <Compile Include="ADMCompletedDemoService.svc.cs">
+      <DependentUpon>ADMCompletedDemoService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="CompleteDemoBusinessLogicHandler.cs" />
     <Compile Include="DemoService.svc.cs">
       <DependentUpon>DemoService.svc</DependentUpon>
     </Compile>

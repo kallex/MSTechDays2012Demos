@@ -1,0 +1,109 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".designer.cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="..\..\abscommon\CommonInclude\Common\CommonCodeblocks.ttinclude" #>
+<#@ include file="ServiceLayer_v1_0.ttinclude" #>
+<#@ include file="CommonInclude.ttinclude" #>
+<#   
+	// Set abstraction specific type and single file specific extension
+	TransformGenerator< ServiceLayerAbstractionType >(GenerateRoot, ".designer.cs");	
+#>
+<#+ 
+	void SetCurrentAbstraction(object abs)
+	{
+		CurrentAbstraction = ( ServiceLayerAbstractionType ) abs;
+	}
+	
+	ServiceLayerAbstractionType CurrentAbstraction;
+	
+	void GenerateRoot()
+	{
+		GenerateAbstraction(CurrentAbstraction);
+	}
+	
+	void GenerateAbstraction(ServiceLayerAbstractionType abstraction)
+	{
+		string[] interfaceUsings = abstraction.Services.Select(service => "using " + service.contractNamespaceName + ";").ToArray();
+		#>
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Text;
+<#= String.Join(Environment.NewLine, interfaceUsings) #>
+
+		<#+
+		foreach(ServicesType services in abstraction.Services ?? new ServicesType[0])
+			GenerateServices(services);
+	}	
+	
+	void GenerateServices(ServicesType services)
+	{
+		#>
+
+namespace <#= services.clientNamespaceName #>
+{
+		<#+
+		foreach(var service in services.Service ?? new ServiceType[0])
+			GenerateService(service);
+		#>
+}
+		<#+
+	}
+
+	void GenerateService(ServiceType service)
+	{
+		string clientClassName = service.name + "Client";
+		string serviceInterfaceName = GetServiceInterfaceName(service.name);
+		#>
+    public class <#= clientClassName #>
+    {
+		<#+
+		foreach(var method in service.Method ?? new MethodType[0])
+			GenerateMethod(service.name, method);
+			
+		#>
+    }
+		<#+
+	}
+	
+	void GenerateMethod(string serviceName, MethodType method)
+	{
+		string returnValueStr = String.IsNullOrEmpty(method.returnValueType) ? "void" : method.returnValueType;
+		string paramDeclarationStr = GetParameterDeclarationString(method.Parameter);
+		string paramCallStr = GetParameterCallString(method.Parameter);
+		string methodName = method.name;
+		string serviceEndPointName = serviceName + ".svc";
+		string serviceInterfaceName = GetServiceInterfaceName(serviceName);
+		#>
+        
+
+        public static <#= returnValueStr #>  <#= methodName #>(<#= paramDeclarationStr #>)
+        {
+            BasicHttpBinding basicHttpBinding = new BasicHttpBinding();
+            EndpointAddress endpointAddress = new EndpointAddress("http://localhost:56071/<#= serviceEndPointName #>");
+            <#= serviceInterfaceName #> service =
+                new ChannelFactory< <#= serviceInterfaceName #> >(basicHttpBinding, endpointAddress).CreateChannel();
+            var serviceResponse = service.<#= methodName #>(<#= paramCallStr #>);
+            return serviceResponse;
+        }
+		
+		
+		<#+
+	}
+	
+#>

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using DemoServiceInterface;
 
 namespace WCFServiceDemo
 {
+    /*
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ADMService" in code, svc and config file together.
     public class ADMService : IADMService
     {
@@ -23,4 +23,5 @@ namespace WCFServiceDemo
             return BusinessLogicHandler.ADMService_GetDataUsingDataContract(composite);
         }
     }
+     */
 }
