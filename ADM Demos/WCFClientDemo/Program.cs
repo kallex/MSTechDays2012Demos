@@ -11,12 +11,10 @@ namespace WCFClientDemo
     {
         static void Main(string[] args)
         {
-            BasicHttpBinding basicHttpBinding = new BasicHttpBinding();
-            EndpointAddress endpointAddress = new EndpointAddress("http://localhost:56071/DemoService.svc");
-            IDemoService demoService =
-                new ChannelFactory<IDemoService>(basicHttpBinding, endpointAddress).CreateChannel();
-            string serviceResponse = demoService.GetData(123);
-            Console.WriteLine(serviceResponse);
+            string demoServiceResponse = DemoServiceClient.GetData(222);
+            Console.WriteLine(demoServiceResponse);
+            string admServiceResponse = ADMServiceClient.GetData(333);
+            Console.WriteLine(admServiceResponse);
             Console.ReadLine();
         }
     }
