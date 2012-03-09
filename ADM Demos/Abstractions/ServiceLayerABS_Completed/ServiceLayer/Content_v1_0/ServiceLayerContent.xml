@@ -6,6 +6,12 @@
         <Parameter name="value" dataType="int"/>
         <Parameter name="value2" dataType="int"/>
       </Method>
+      <Method name="SayHi" returnValueType="string">
+        <Parameter name="customParam" dataType="MyComposite"/>
+      </Method>
     </Service>
+    <CompositeType name="MyComposite">
+      <Property dataType="string" name="Message" initializationExpression="&quot;Hi!&quot;"/>
+    </CompositeType>
   </Services>
 </ServiceLayerAbstraction>

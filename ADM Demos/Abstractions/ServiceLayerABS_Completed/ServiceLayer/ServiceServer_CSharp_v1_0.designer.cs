@@ -23,6 +23,14 @@ namespace ADMDemoCompleteServer
 		}
 		
 		
+		        
+        public string  SayHi(MyComposite customParam)
+        {
+            // NOTE! Business logic is properly routed from service layer to business logic layer
+            return BusinessLogicHandler.ADMCompletedDemoService_SayHi(customParam);
+		}
+		
+		
 		    }
 		}
 		

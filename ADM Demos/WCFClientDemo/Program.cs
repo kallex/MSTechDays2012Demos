@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using ADMDemoCompleteClient;
+using ADMDemoCompleteContract;
 using WCFServiceDemo;
 
 namespace WCFClientDemo
@@ -18,6 +19,11 @@ namespace WCFClientDemo
             Console.WriteLine(admServiceResponse);
             string admCompletedServiceResponse = ADMCompletedDemoServiceClient.GetData(123, 345);
             Console.WriteLine(admCompletedServiceResponse);
+            string admCompositeServiceResponse = ADMCompletedDemoServiceClient.SayHi(new MyComposite()
+                                                                                         {
+                                                                                             Message = "TD 2012"
+                                                                                         });
+            Console.WriteLine(admCompositeServiceResponse);
             Console.ReadLine();
         }
     }

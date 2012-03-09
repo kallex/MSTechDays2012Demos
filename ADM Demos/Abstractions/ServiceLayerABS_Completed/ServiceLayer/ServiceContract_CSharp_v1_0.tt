@@ -36,6 +36,7 @@
 	void GenerateAbstraction(ServiceLayerAbstractionType abstraction)
 	{
 		#>
+using System.Runtime.Serialization;
 using System.ServiceModel;
 		<#+
 		foreach(ServicesType services in abstraction.Services ?? new ServicesType[0])
@@ -113,7 +114,7 @@ namespace <#= services.contractNamespaceName #> {
         <#= propertyType #> <#= privateFieldName #><#= initialization #>;
 
         [DataMember]
-        public bool <#= propertyName #>
+        public <#= propertyType #> <#= propertyName #>
         {
             get { return <#= privateFieldName #>; }
             set { <#= privateFieldName #> = value; }

@@ -27,6 +27,19 @@ namespace ADMDemoCompleteClient
         }
 		
 		
+		        
+
+        public static string  SayHi(MyComposite customParam)
+        {
+            BasicHttpBinding basicHttpBinding = new BasicHttpBinding();
+            EndpointAddress endpointAddress = new EndpointAddress("http://localhost:56071/ADMCompletedDemoService.svc");
+            IADMCompletedDemoService service =
+                new ChannelFactory< IADMCompletedDemoService >(basicHttpBinding, endpointAddress).CreateChannel();
+            var serviceResponse = service.SayHi(customParam);
+            return serviceResponse;
+        }
+		
+		
 		    }
 		}
 		
