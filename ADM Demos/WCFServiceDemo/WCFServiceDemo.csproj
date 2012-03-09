@@ -67,6 +67,7 @@
     <Compile Include="ADMService.svc.cs">
       <DependentUpon>ADMService.svc</DependentUpon>
     </Compile>
+    <Compile Include="BusinessLogicHandler.cs" />
     <Compile Include="DemoService.svc.cs">
       <DependentUpon>DemoService.svc</DependentUpon>
     </Compile>

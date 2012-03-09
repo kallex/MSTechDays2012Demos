@@ -12,12 +12,14 @@ namespace WCFServiceDemo
     {
         public string GetData(int value)
         {
-            return "ADM Demo: " + value;
+            // NOTE! Business logic is properly routed from service layer to business logic layer
+            return BusinessLogicHandler.ADMService_GetData(value);
         }
 
         public ADMCompositeType GetDataUsingDataContract(ADMCompositeType composite)
         {
-            return composite;
+            // NOTE! Business logic is properly routed from service layer to business logic layer
+            return BusinessLogicHandler.ADMService_GetDataUsingDataContract(composite);
         }
     }
 }
