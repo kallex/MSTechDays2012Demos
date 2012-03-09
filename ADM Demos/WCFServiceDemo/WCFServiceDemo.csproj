@@ -53,6 +53,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\Abstractions\ServiceLayerABS\ServiceLayer\Content_v1_0\ServiceLayerContent.xml">
+      <Link>ADM Automation\ServiceLayerContent.xml</Link>
+    </Content>
     <Content Include="ADMService.svc" />
     <Content Include="DemoService.svc" />
     <Content Include="Web.config" />
@@ -64,6 +67,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Abstractions\ServiceLayerABS\ServiceLayer\ServiceServer_CSharp_v1_0.designer.cs">
+      <Link>ADM\ServiceServer_CSharp_v1_0.designer.cs</Link>
+    </Compile>
     <Compile Include="ADMService.svc.cs">
       <DependentUpon>ADMService.svc</DependentUpon>
     </Compile>

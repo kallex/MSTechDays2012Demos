@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- edited with XMLSpy v2011 rel. 2 sp1 (http://www.altova.com) by Kalle Launiala (Citrus Solutions Oy) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" id="MethodCall_v1_0">
-	<xs:element name="MethodCallAbstraction">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" id="ServiceLayer_v1_0">
+	<xs:element name="ServiceLayerAbstraction">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="Methods" maxOccurs="unbounded">

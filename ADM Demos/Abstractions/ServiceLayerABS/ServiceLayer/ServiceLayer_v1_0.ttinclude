@@ -23,13 +23,13 @@
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
 [System.Xml.Serialization.XmlRootAttribute(Namespace="", IsNullable=false)]
-public partial class MethodCallAbstraction {
+public partial class ServiceLayerAbstraction {
     
-    private MethodCallAbstractionMethods[] methodsField;
+    private ServiceLayerAbstractionMethods[] methodsField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute("Methods")]
-    public MethodCallAbstractionMethods[] Methods {
+    public ServiceLayerAbstractionMethods[] Methods {
         get {
             return this.methodsField;
         }
@@ -45,7 +45,7 @@ public partial class MethodCallAbstraction {
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true)]
-public partial class MethodCallAbstractionMethods {
+public partial class ServiceLayerAbstractionMethods {
     
     private string namespaceNameField;
     

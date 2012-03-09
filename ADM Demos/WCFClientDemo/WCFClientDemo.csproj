@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Abstractions\ServiceLayerABS\ServiceLayer\ServiceClient_CSharp_v1_0.designer.cs">
+      <Link>ADM\ServiceClient_CSharp_v1_0.designer.cs</Link>
+    </Compile>
     <Compile Include="ADMServiceClient.cs" />
     <Compile Include="DemoServiceClient.cs" />
     <Compile Include="Program.cs" />
@@ -61,6 +64,14 @@
       <Project>{90D31336-E81F-466B-8349-2C6722746033}</Project>
       <Name>DemoServiceInterface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Abstractions\ServiceLayerABS\ServiceLayer\Content_v1_0\ServiceLayerContent.xml">
+      <Link>ADM Automation\ServiceLayerContent.xml</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

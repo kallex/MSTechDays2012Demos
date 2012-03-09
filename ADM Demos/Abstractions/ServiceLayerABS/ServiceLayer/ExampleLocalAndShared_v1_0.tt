@@ -1,0 +1,38 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".designer.cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ Assembly Name="System.Xml.Linq.dll" #>
+<#@ Assembly Name="System.Windows.Forms.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#@ include file="..\..\abscommon\CommonInclude\Common\CommonCodeblocks.ttinclude" #>
+<#@ include file="ServiceLayer_v1_0.ttinclude" #>
+<#   
+	// Set abstraction specific type and single file specific extension
+	TransformGenerator< ServiceLayerAbstraction >(GenerateRoot, ".designer.cs");	
+#>
+<#+ 
+	void SetCurrentAbstraction(object abs)
+	{
+		CurrentAbstraction = ( ServiceLayerAbstraction ) abs;
+	}
+	
+	ServiceLayerAbstraction CurrentAbstraction;
+	
+	void GenerateRoot()
+	{
+		GenerateAbstraction(CurrentAbstraction);
+	}
+	
+	void GenerateAbstraction(ServiceLayerAbstraction abstraction)
+	{
+	}	
+#>

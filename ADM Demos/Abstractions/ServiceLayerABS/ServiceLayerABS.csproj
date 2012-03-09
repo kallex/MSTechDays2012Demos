@@ -8,8 +8,8 @@
     <ProjectGuid>{5B49BA70-D877-49BF-8437-E709A6FFE9E1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MethodCallABS</RootNamespace>
-    <AssemblyName>MethodCallABS</AssemblyName>
+    <RootNamespace>ServiceLayerABS</RootNamespace>
+    <AssemblyName>ServiceLayerABS</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,20 +41,53 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="ServiceLayer\ServiceServer_CSharp_v1_0.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ServiceServer_CSharp_v1_0.designer.cs</LastGenOutput>
+    </None>
+    <None Include="ServiceLayer\ServiceClient_CSharp_v1_0.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ServiceClient_CSharp_v1_0.designer.cs</LastGenOutput>
+    </None>
+    <None Include="ServiceLayer\ServiceContract_CSharp_v1_0.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceContract_CSharp_v1_0.tt</DependentUpon>
+    </None>
+    <None Include="ServiceLayer\ServiceClient_CSharp_v1_0.designer.cs">
+      <DependentUpon>ServiceClient_CSharp_v1_0.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </None>
+    <None Include="ServiceLayer\ServiceServer_CSharp_v1_0.designer.cs">
+      <DependentUpon>ServiceServer_CSharp_v1_0.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </None>
+    <Compile Include="ServiceLayer\ServiceLayer_v1_0_namespace.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="MethodCall\Content_v1_0\MethodCall_v1_0.tt">
+    <Content Include="Options.xml" />
+    <Content Include="ServiceLayer\Content_v1_0\ServiceLayerContent.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ServiceLayer\Content_v1_0\ServiceLayer_v1_0.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MethodCall_v1_0.xsd</DependentUpon>
+      <DependentUpon>ServiceLayer_v1_0.xsd</DependentUpon>
     </None>
-    <None Include="MethodCall\Content_v1_0\MethodCall_v1_0.xsd">
+    <None Include="ServiceLayer\Content_v1_0\ServiceLayer_v1_0.xsd">
       <SubType>Designer</SubType>
       <Generator>T4ScriptFileGenerator</Generator>
-      <LastGenOutput>MethodCall_v1_0.tt</LastGenOutput>
+      <LastGenOutput>ServiceLayer_v1_0.tt</LastGenOutput>
     </None>
+    <None Include="ServiceLayer\ServiceContract_CSharp_v1_0.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ServiceContract_CSharp_v1_0.designer.cs</LastGenOutput>
+    </None>
+    <None Include="ServiceLayer\ExampleLocalAndShared_v1_0.tt" />
+    <None Include="ServiceLayer\ServiceLayer_v1_0.ttinclude" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

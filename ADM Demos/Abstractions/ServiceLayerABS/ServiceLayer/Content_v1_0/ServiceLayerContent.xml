@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceLayerAbstraction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ServiceLayer_v1_0.xsd">
+	<Methods namespaceName="xyz"/>
+</ServiceLayerAbstraction>

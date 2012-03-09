@@ -42,9 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Abstractions\ServiceLayerABS\ServiceLayer\ServiceContract_CSharp_v1_0.designer.cs">
+      <Link>ADM\ServiceContract_CSharp_v1_0.designer.cs</Link>
+    </Compile>
     <Compile Include="IADMService.cs" />
     <Compile Include="IDemoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Abstractions\ServiceLayerABS\ServiceLayer\Content_v1_0\ServiceLayerContent.xml">
+      <Link>ADM Automation\ServiceLayerContent.xml</Link>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
