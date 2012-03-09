@@ -21,7 +21,7 @@ namespace WCFClientDemo
             Console.WriteLine(admCompletedServiceResponse);
             string admCompositeServiceResponse = ADMCompletedDemoServiceClient.SayHi(new MyComposite()
                                                                                          {
-                                                                                             Message = "TD 2012"
+                                                                                             Message = "My Composite - TD 2012"
                                                                                          });
             Console.WriteLine(admCompositeServiceResponse);
             Console.ReadLine();
