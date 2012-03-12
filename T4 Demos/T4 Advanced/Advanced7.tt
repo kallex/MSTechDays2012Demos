@@ -1,0 +1,131 @@
+﻿<#@ template language="C#" hostspecific="True" debug="True" #>
+<#@ output extension="generated.cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#@ assembly name="System.Core.dll" #>
+
+<#
+	string ttFileName = Host.TemplateFile;
+	string ttDirectory = Path.GetDirectoryName(ttFileName);
+	string txtFileName = Path.Combine(ttDirectory, Path.GetFileNameWithoutExtension(ttFileName) + ".txt");
+	string[] fileLines = File.ReadAllLines(txtFileName);
+	foreach(string lineContent in fileLines)
+	{
+		string assemblyFileName = Path.Combine(ttDirectory, lineContent);
+		CurrContent.ParseEFAssembly(assemblyFileName);
+	}
+	GenerateUsings();
+	GenerateContent(CurrContent);
+#>
+	
+<#+
+	class GenClass
+	{
+		public string Name;
+		public List<GenProperty> GenProperties = new List<GenProperty>();
+	}
+	
+	class GenProperty
+	{
+		public string Name;
+		public string DataType;
+	}
+
+	SourceContent CurrContent = new SourceContent();
+	
+	class SourceContent
+	{
+		public List<GenClass> GenClasses = new List<GenClass>();
+		public void ParseEFAssembly(string assemblyFile)
+		{
+			Assembly efCandidate = Assembly.LoadFrom(assemblyFile);
+			Type[] assemblyTypes = efCandidate.GetTypes().Where(type => type.IsClass).ToArray();
+			foreach(Type type in assemblyTypes)
+			{
+				PropertyInfo[] properties = type.GetProperties();
+				GenClass classItem = new GenClass() { Name = type.Name };
+				foreach(PropertyInfo pInfo in properties)
+				{
+					GenProperty genProp = new GenProperty();
+					genProp.DataType = pInfo.PropertyType.Name;
+					genProp.Name = pInfo.Name;
+					classItem.GenProperties.Add(genProp);
+				}
+				GenClasses.Add(classItem);
+			}
+		}
+		public void ParseLine(string lineContent)
+		{
+			string[] classPropertySplit = lineContent.Split('-');
+			string className = classPropertySplit[0];
+			List<GenProperty> properties = new List<GenProperty>();
+			if(classPropertySplit.Length > 1)
+			{
+				string propertyPart = classPropertySplit[1];
+				string[] propertySplit = propertyPart.Split(';');
+				GenProperty[] propArray = propertySplit.Select(parseProperty).ToArray();
+				properties.AddRange(propArray);
+				
+			}
+			GenClass classItem = GenClasses.FirstOrDefault(candidate => candidate.Name == className);
+			if(classItem == null) {
+				classItem = new GenClass { Name = className };			
+				GenClasses.Add(classItem);
+			}
+			classItem.GenProperties.AddRange(properties);
+		}
+		
+		private GenProperty parseProperty(string propString)
+		{
+			string[] propSplit = propString.Split(':');
+			return new GenProperty() { Name = propSplit[0], DataType = propSplit[1] };
+		}
+	}
+	
+	void GenerateContent(SourceContent content)
+	{
+		GenerateClasses(content.GenClasses.ToArray());
+	}
+	
+	void GenerateClasses(GenClass[] classArray)
+	{
+		foreach(GenClass classItem in classArray)
+			GenerateClass(classItem);
+	}
+	
+	void GenerateClass(GenClass classItem)
+	{
+		string className = classItem.Name;
+		#>
+	public partial class <#= className #>
+	{
+	<#+
+		foreach(GenProperty propItem in classItem.GenProperties)
+		{
+			GenerateProperty(propItem);
+		}
+	#>
+	}
+		<#+
+	}
+	
+	void GenerateProperty(GenProperty propItem)
+	{
+		#>
+		public <#= propItem.DataType #> <#= propItem.Name #> { get; set; }
+		<#+
+		
+	}
+	
+	void GenerateUsings()
+	{
+		#>
+using System.Collections.Generic;
+	
+		<#+
+	}
+	
+#>

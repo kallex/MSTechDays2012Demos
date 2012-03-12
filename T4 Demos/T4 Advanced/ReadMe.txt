@@ -15,3 +15,10 @@ Advanced6_ADM : Toolchain supported process flow for "Advanced5"
 	- XML Schema file is processed with T4 to provide serialization classes
 	- Serialization classes are provided as .ttinclude
 	- T4 generator gets serialization out-of-the-box and intermediate structure/model intellisense
+
+
+Additional demos (added after the seminar presentation):
+
+Advanced7 : Advanced5 by replacing the .txt input as assemblies to read
+	- Parses class/property structure from given assembly
+	- Uses as an example "T4 EntityFramework Custom Aspect.exe" 
